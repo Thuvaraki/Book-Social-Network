@@ -1,0 +1,35 @@
+services:
+  postgres:
+    container_name: postgres-sql-bsn
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data     # Path where PostgreSQL stores its data inside the container
+      POSTGRES_DB: book_social_network
+    volumes:     # connects the Docker volume named postgres to the path /data/postgres inside the container. It ensures data is saved permanently, even if the container is deleted. Without this, our data would disappear when we stop the container.
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      spring-demo
+    restart: unless-stopped
+  mail-dev:     # fake SMTP server - for testing email sending during development
+    container_name: mail-dev-bsn
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+networks:
+  spring-demo:
+    driver: bridge     # Docker already has a built-in default network called bridge, but it’s shared by all containers by default — meaning unrelated containers can accidentally see or talk to each other. So we create our own network (spring-demo) to keep it isolated and organized.
+
+volumes:
+  postgres:
+    driver: local     # tells Docker to store the data on our local machine’s file system
+
+
+
+
+

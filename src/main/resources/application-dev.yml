@@ -1,0 +1,31 @@
+# contains settings specific to the development environment
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book_social_network
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update     # Automatically creates/updates tables based on our Java entity classes.
+    show-sql: false     # would not print SQL queries in the console
+    properties:
+      hibernate:
+        format_sql:  true     # Makes SQL output easier to read
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:     # configures email sending from our app
+    host: localhost
+    port: 1025
+    username: thuva
+    password: thuva
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000

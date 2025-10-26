@@ -1,0 +1,13 @@
+# configuration file; It tells Spring Boot how to set up the application
+spring:
+  profiles:
+    active: dev     # Use the settings from the file application-dev.yml
+  servlet:
+    multipart:
+      max-file-size: 50MB     # maximum upload size for files
+springdoc:     # for Swagger / OpenAPI
+  default-produces-media-type: application/json     # means that our API documentation will default to returning JSON response
+
+server:
+  servlet:
+    context-path: /api/v1/     # base URL
