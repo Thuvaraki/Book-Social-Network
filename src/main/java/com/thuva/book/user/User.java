@@ -1,5 +1,7 @@
 package com.thuva.book.user;
 
+import com.thuva.book.book.Book;
+import com.thuva.book.history.BookTransactionHistory;
 import com.thuva.book.role.Role;
 
 import jakarta.persistence.*;
@@ -46,6 +48,12 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
