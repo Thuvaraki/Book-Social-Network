@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableJpaAuditing // a Spring Data JPA annotation that activates the auditing feature.
+@EnableJpaAuditing(auditorAwareRef = "auditorAware") // a Spring Data JPA annotation that activates the auditing feature. auditorAwareRef refers to a Spring Bean that implements the interface AuditorAware<T>
 @EnableAsync
 public class BookNetworkApiApplication {
 
