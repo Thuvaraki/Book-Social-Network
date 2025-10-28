@@ -12,7 +12,7 @@ services:
     ports:
       - 5432:5432
     networks:
-      spring-demo
+      - spring-demo
     restart: unless-stopped
   mail-dev:     # fake SMTP server - for testing email sending during development
     container_name: mail-dev-bsn

@@ -1,8 +1,13 @@
 package com.thuva.book.user;
 
+import com.thuva.book.role.Role;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,7 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +28,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class) //Enables auditing features - automatically fills createdDate and lastModifiedDate
 public class User implements UserDetails, Principal {
 
@@ -58,7 +62,7 @@ public class User implements UserDetails, Principal {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()
-                .map( r -> new SimpleGrantedAuthority(r.getRoleName()))
+                .map( r -> new SimpleGrantedAuthority(r.getName()))
                 .collect(Collectors.toList());
     }
 
@@ -92,7 +96,7 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    private String fullName(){
+    public String fullName(){
         return firstname + " " + lastname;
     }
 }
