@@ -38,6 +38,9 @@ application:
   mailing:
     frontend:
       activation-url : http://localhost:4200/activate-account
+  file:
+    uploads:
+      photos-output-path : ./uploads # . refers to the current working directory where application runs. uploads is a folder inside that directory.
 
 server:
   port : 8088

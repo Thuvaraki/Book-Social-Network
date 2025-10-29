@@ -2,6 +2,7 @@ package com.thuva.book.book;
 
 import com.thuva.book.common.PageResponse;
 import com.thuva.book.exception.OperationNotPermittedException;
+import com.thuva.book.file.FileStorageService;
 import com.thuva.book.history.BookTransactionHistory;
 import com.thuva.book.history.BookTransactionHistoryRepository;
 import com.thuva.book.user.User;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import static com.thuva.book.book.BookSpecification.withOwnerId;
 import java.util.List;
@@ -24,6 +26,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private  final BookTransactionHistoryRepository bookTransactionHistoryRepository;
+    private final FileStorageService fileStorageService;;
     public Integer save(BookRequest request, Authentication connectedUser) { // connectedUser - the authentication object representing the logged-in user
         User user = ((User) connectedUser.getPrincipal());
         Book book = bookMapper.toBook(request);
@@ -193,6 +196,15 @@ public class BookService {
 
         bookTransactionHistory.setReturnApproved(true);
         return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
+    }
+
+    public void uploadBookCoverPicture(MultipartFile file, Authentication connectedUser, Integer bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with ID:: " + bookId));
+         User user = ((User) connectedUser.getPrincipal());
+        var bookCover = fileStorageService.saveFile(file, user.getId());
+        book.setBookCover(bookCover);
+        bookRepository.save(book);
     }
 
 

@@ -1,12 +1,14 @@
 package com.thuva.book.book;
 
 import com.thuva.book.common.PageResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("books")
@@ -102,5 +104,16 @@ public class BookController {
             Authentication connectedUser
     ) {
         return ResponseEntity.ok(service.approveReturnBorrowedBook(bookId, connectedUser));
+    }
+
+    @PostMapping(value = "/cover/{book-id}", consumes = "multipart/form-data") //consumes = "multipart/form-data" means this endpoint expects a file upload request, usually sent from a form or frontend using FormData.
+    public ResponseEntity<?> uploadBookCoverPicture(
+            @PathVariable("book-id") Integer bookId,
+            @Parameter() // used to describe API parameters for documentation purposes
+            @RequestPart("file") MultipartFile file,
+            Authentication connectedUser
+    ) {
+        service.uploadBookCoverPicture(file, connectedUser, bookId);
+        return ResponseEntity.accepted().build();
     }
 }
