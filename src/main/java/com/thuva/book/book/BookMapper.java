@@ -1,5 +1,6 @@
 package com.thuva.book.book;
 
+import com.thuva.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 @Service
 public class BookMapper {
@@ -26,6 +27,18 @@ public class BookMapper {
                 .archive(book.isArchived())
                 .shareable(book.isShareable())
                 // todo - implement cover later
+                .build();
+    }
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistory) {
+        return BorrowedBookResponse.builder()
+                .id(bookTransactionHistory.getId())
+                .title(bookTransactionHistory.getBook().getTitle())
+                .authorName(bookTransactionHistory.getBook().getAuthorName())
+                .isbn(bookTransactionHistory.getBook().getIsbn())
+                .rate(bookTransactionHistory.getBook().getRate())
+                .returned(bookTransactionHistory.isReturned())
+                .returnApproved(bookTransactionHistory.isReturnApproved())
                 .build();
     }
 }
