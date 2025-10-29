@@ -1,6 +1,7 @@
 package com.thuva.book.book;
 
 import com.thuva.book.common.PageResponse;
+import com.thuva.book.exception.OperationNotPermittedException;
 import com.thuva.book.history.BookTransactionHistory;
 import com.thuva.book.history.BookTransactionHistoryRepository;
 import com.thuva.book.user.User;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import static com.thuva.book.book.BookSpecification.withOwnerId;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -106,4 +108,17 @@ public class BookService {
                 allBorrowedBooks.isLast()
         );
     }
+
+    public Integer updateShareableStatus(Integer bookId, Authentication connectedUser) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with ID:: " + bookId));
+        if (!Objects.equals(book.getCreatedBy(), connectedUser.getName())) {
+            throw new OperationNotPermittedException("You cannot update others books shareable status");
+        }
+        book.setShareable(!book.isShareable());
+        bookRepository.save(book);
+        return bookId;
+    }
+
+
 }
