@@ -1,5 +1,6 @@
 package com.thuva.book.book;
 
+import com.thuva.book.file.FileUtils;
 import com.thuva.book.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 @Service
@@ -26,7 +27,7 @@ public class BookMapper {
                 .rate(book.getRate())
                 .archive(book.isArchived())
                 .shareable(book.isShareable())
-                // todo - implement cover later
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
