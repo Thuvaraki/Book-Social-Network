@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RegistrationRequest } from '../../services/models';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,12 +18,12 @@ export class Register {
     lastname: '',
     password: '',
   };
-  errorMsg: Array<string> = [];
+  errorMsg = signal<string[]>([]);
 
   constructor(private router: Router, private authService: AuthenticationService) {}
 
   register(): void {
-    this.errorMsg = [];
+    this.errorMsg.set([]);
     this.authService
       .register({
         body: this.registerRequest,
@@ -33,10 +33,10 @@ export class Register {
       })
       .catch((err) => {
         console.error(err);
-        if (err.error.validationErrors) {
-          this.errorMsg = err.error.validationErrors;
-        } else {
-          this.errorMsg.push(err.error.error);
+        if (err.error?.validationErrors) {
+          this.errorMsg.set(err.error.validationErrors);
+        } else if (err.error?.error) {
+          this.errorMsg.set([err.error.error]);
         }
       });
   }
