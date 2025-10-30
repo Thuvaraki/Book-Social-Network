@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthenticationRequest } from '../../services/models/authentication-request';
@@ -17,7 +17,7 @@ export class Login {
     email: '',
     password: '',
   };
-  errorMsg: Array<String> = [];
+  errorMsg = signal<string[]>([]);
 
   constructor(
     private router: Router,
@@ -26,21 +26,21 @@ export class Login {
   ) {}
 
   login(): void {
-    this.errorMsg = [];
+    this.errorMsg.set([]); // reset errors
+
     this.authService
-      .authenticate({
-        body: this.authRequest,
-      })
+      .authenticate({ body: this.authRequest })
       .then((res) => {
         this.tokenService.token = res.token as string;
         // this.router.navigate(['books']);
       })
       .catch((err) => {
         console.error(err);
-        if (err.error.validationErrors) {
-          this.errorMsg = err.error.validationErrors;
-        } else {
-          this.errorMsg.push(err.error.error);
+
+        if (err.error?.validationErrors) {
+          this.errorMsg.set(err.error.validationErrors);
+        } else if (err.error?.error) {
+          this.errorMsg.set([err.error.error]);
         }
       });
   }
