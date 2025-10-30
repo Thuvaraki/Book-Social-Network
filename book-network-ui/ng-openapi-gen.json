@@ -1,0 +1,9 @@
+{
+  "input": "./src/openapi/openapi.json",
+  "output": "./src/app/services",
+  "moduleName": "ApiModule",
+  "generateClient": true,
+  "services": true,
+  "models": true,
+  "enums": true
+}
