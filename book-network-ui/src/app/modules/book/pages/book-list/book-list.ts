@@ -15,11 +15,13 @@ export class BookList implements OnInit {
   bookResponse = signal<PageResponseBookResponse>({});
   page = 0;
   size = 5;
+
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
     this.findAllBooks();
   }
+
   private findAllBooks() {
     this.bookService
       .findAllBooks({ page: this.page, size: this.size })
@@ -28,5 +30,34 @@ export class BookList implements OnInit {
         this.bookResponse.set(res);
       })
       .catch((err) => console.error(err));
+  }
+
+  gotToPage(page: number) {
+    this.page = page;
+    this.findAllBooks();
+  }
+
+  goToFirstPage() {
+    this.page = 0;
+    this.findAllBooks();
+  }
+
+  goToPreviousPage() {
+    this.page--;
+    this.findAllBooks();
+  }
+
+  goToLastPage() {
+    this.page = (this.bookResponse().totalPages as number) - 1;
+    this.findAllBooks();
+  }
+
+  goToNextPage() {
+    this.page++;
+    this.findAllBooks();
+  }
+
+  get isLastPage() {
+    return this.page === (this.bookResponse().totalPages as number) - 1;
   }
 }
