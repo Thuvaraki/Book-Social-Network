@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter { // It runs once per request
     private final JwtService jwtService;
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(
         @NonNull HttpServletRequest  request,
