@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { BookResponse } from '../../../../services/models';
 import { CommonModule } from '@angular/common';
 import { Rating } from '../rating/rating';
@@ -11,7 +11,7 @@ import { Rating } from '../rating/rating';
 })
 export class BookCard {
   private _book: BookResponse = {};
-  private _manage: boolean = false;
+  private _manage = signal(false);
   private _bookCover: string | undefined;
 
   get book(): BookResponse {
@@ -31,12 +31,12 @@ export class BookCard {
   }
 
   get manage(): boolean {
-    return this._manage;
+    return this._manage();
   }
 
   @Input()
   set manage(value: boolean) {
-    this._manage = value;
+    this._manage.set(value);
   }
 
   // Passing data from child component to parent component via @Output and EventEmitter

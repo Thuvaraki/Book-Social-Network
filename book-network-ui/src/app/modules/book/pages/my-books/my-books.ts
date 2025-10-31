@@ -6,17 +6,15 @@ import { BookResponse, PageResponseBookResponse } from '../../../../services/mod
 import { BookCard } from '../../components/book-card/book-card';
 
 @Component({
-  selector: 'app-book-list',
+  selector: 'app-my-books',
   imports: [CommonModule, BookCard],
-  templateUrl: './book-list.html',
-  styleUrl: './book-list.scss',
+  templateUrl: './my-books.html',
+  styleUrl: './my-books.scss',
 })
-export class BookList implements OnInit {
+export class MyBooks implements OnInit {
   bookResponse = signal<PageResponseBookResponse>({});
   page = 0;
-  size = 5;
-  message = signal<string>('');
-  level = signal<string>('');
+  size = 2;
 
   constructor(private bookService: BookService, private router: Router) {}
 
@@ -26,7 +24,7 @@ export class BookList implements OnInit {
 
   private findAllBooks() {
     this.bookService
-      .findAllBooks({ page: this.page, size: this.size })
+      .findAllBooksByOwner({ page: this.page, size: this.size })
       .then((res) => {
         this.bookResponse.set(res);
       })
@@ -62,20 +60,9 @@ export class BookList implements OnInit {
     return this.page === (this.bookResponse().totalPages as number) - 1;
   }
 
-  borrowBook(book: BookResponse) {
-    this.message.set('');
-    this.bookService
-      .borrowBook({
-        'book-id': book.id as number,
-      })
-      .then((res) => {
-        this.level.set('success');
-        this.message.set('Book successfully added to your list.');
-      })
-      .catch((err) => {
-        console.log(err);
-        this.level.set('error');
-        this.message.set(err.error.error);
-      });
-  }
+  archiveBook(book: BookResponse) {}
+
+  shareBook(book: BookResponse) {}
+
+  editBook(book: BookResponse) {}
 }
