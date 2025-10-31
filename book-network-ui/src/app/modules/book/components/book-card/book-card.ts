@@ -25,7 +25,7 @@ export class BookCard {
 
   get bookCover(): string | undefined {
     if (this._book.cover) {
-      return 'data:image/jpg;base64, ' + this._book.cover;
+      return 'data:image/jpg;base64,' + this._book.cover;
     }
     return 'https://pngimg.com/uploads/book/book_PNG2111.png';
   }
