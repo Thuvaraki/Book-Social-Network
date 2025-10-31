@@ -32,7 +32,7 @@ export class Login {
       .authenticate({ body: this.authRequest })
       .then((res) => {
         this.tokenService.token = res.token as string;
-        // this.router.navigate(['books']);
+        this.router.navigate(['books']);
       })
       .catch((err) => {
         console.error(err);
