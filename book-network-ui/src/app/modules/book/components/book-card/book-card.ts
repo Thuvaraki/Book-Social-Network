@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BookResponse } from '../../../../services/models';
 import { CommonModule } from '@angular/common';
+import { Rating } from '../rating/rating';
 
 @Component({
   selector: 'app-book-card',
-  imports: [CommonModule],
+  imports: [CommonModule, Rating],
   templateUrl: './book-card.html',
   styleUrl: './book-card.scss',
 })
