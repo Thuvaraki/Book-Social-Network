@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Main } from './pages/main/main';
 import { BookList } from './pages/book-list/book-list';
 import { MyBooks } from './pages/my-books/my-books';
+import { ManageBooks } from './pages/manage-books/manage-books';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'my-books',
         component: MyBooks,
+      },
+      {
+        path: 'manage/:bookId',
+        component: ManageBooks,
       },
     ],
   },
