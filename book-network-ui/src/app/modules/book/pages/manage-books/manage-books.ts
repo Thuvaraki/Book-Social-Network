@@ -31,23 +31,18 @@ export class ManageBooks implements OnInit {
 
   ngOnInit(): void {
     const bookId = Number(this.activatedRoute.snapshot.params['bookId']);
-    console.log('bookId', typeof bookId);
     if (bookId) {
-      this.bookService
-        .findById({
-          'book-id': bookId,
-        })
-        .then((book) => {
-          this.bookRequest = {
-            id: book.id,
-            title: book.title as string,
-            authorName: book.authorName as string,
-            isbn: book.isbn as string,
-            synopsis: book.synopsis as string,
-            shareable: book.shareable,
-          };
-          this.selectedPicture.set('data:image/jpg;base64,' + book.cover);
-        });
+      this.bookService.findById({ 'book-id': 1 }).then((book) => {
+        this.bookRequest = {
+          id: book.id,
+          title: book.title as string,
+          authorName: book.authorName as string,
+          isbn: book.isbn as string,
+          synopsis: book.synopsis as string,
+          shareable: book.shareable,
+        };
+        this.selectedPicture.set('data:image/jpg;base64,' + book.cover);
+      });
     }
     console.log('this.bookRequest', this.bookRequest);
   }

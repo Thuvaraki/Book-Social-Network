@@ -52,7 +52,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBooks$Response(params?: FindAllBooks$Params, context?: HttpContext): Promise<StrictHttpResponse<PageResponseBookResponse>> {
+  findAllBooks$Response(
+    params?: FindAllBooks$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<PageResponseBookResponse>> {
     const obs = findAllBooks(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -63,9 +66,14 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBooks(params?: FindAllBooks$Params, context?: HttpContext): Promise<PageResponseBookResponse> {
+  findAllBooks(
+    params?: FindAllBooks$Params,
+    context?: HttpContext
+  ): Promise<PageResponseBookResponse> {
     const resp = this.findAllBooks$Response(params, context);
-    return resp.then((r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse => r.body);
+    return resp.then(
+      (r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse => r.body
+    );
   }
 
   /** Path part for operation `saveBook()` */
@@ -77,7 +85,10 @@ export class BookService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  saveBook$Response(params: SaveBook$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  saveBook$Response(
+    params: SaveBook$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = saveBook(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -102,8 +113,10 @@ export class BookService extends BaseService {
    *
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
-  uploadBookCoverPicture$Response(params: UploadBookCoverPicture$Params, context?: HttpContext): Promise<StrictHttpResponse<{
-}>> {
+  uploadBookCoverPicture$Response(
+    params: UploadBookCoverPicture$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<{}>> {
     const obs = uploadBookCoverPicture(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -114,12 +127,12 @@ export class BookService extends BaseService {
    *
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
-  uploadBookCoverPicture(params: UploadBookCoverPicture$Params, context?: HttpContext): Promise<{
-}> {
+  uploadBookCoverPicture(
+    params: UploadBookCoverPicture$Params,
+    context?: HttpContext
+  ): Promise<{}> {
     const resp = this.uploadBookCoverPicture$Response(params, context);
-    return resp.then((r: StrictHttpResponse<{
-}>): {
-} => r.body);
+    return resp.then((r: StrictHttpResponse<{}>): {} => r.body);
   }
 
   /** Path part for operation `borrowBook()` */
@@ -131,7 +144,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  borrowBook$Response(params: BorrowBook$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  borrowBook$Response(
+    params: BorrowBook$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = borrowBook(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -156,7 +172,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  updateShareableStatus$Response(params: UpdateShareableStatus$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  updateShareableStatus$Response(
+    params: UpdateShareableStatus$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = updateShareableStatus(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -167,7 +186,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  updateShareableStatus(params: UpdateShareableStatus$Params, context?: HttpContext): Promise<number> {
+  updateShareableStatus(
+    params: UpdateShareableStatus$Params,
+    context?: HttpContext
+  ): Promise<number> {
     const resp = this.updateShareableStatus$Response(params, context);
     return resp.then((r: StrictHttpResponse<number>): number => r.body);
   }
@@ -181,7 +203,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  returnBorrowBook$Response(params: ReturnBorrowBook$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  returnBorrowBook$Response(
+    params: ReturnBorrowBook$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = returnBorrowBook(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -206,7 +231,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  approveReturnBorrowBook$Response(params: ApproveReturnBorrowBook$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  approveReturnBorrowBook$Response(
+    params: ApproveReturnBorrowBook$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = approveReturnBorrowBook(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -217,7 +245,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  approveReturnBorrowBook(params: ApproveReturnBorrowBook$Params, context?: HttpContext): Promise<number> {
+  approveReturnBorrowBook(
+    params: ApproveReturnBorrowBook$Params,
+    context?: HttpContext
+  ): Promise<number> {
     const resp = this.approveReturnBorrowBook$Response(params, context);
     return resp.then((r: StrictHttpResponse<number>): number => r.body);
   }
@@ -231,7 +262,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  updateArchivedStatus$Response(params: UpdateArchivedStatus$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  updateArchivedStatus$Response(
+    params: UpdateArchivedStatus$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = updateArchivedStatus(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -242,7 +276,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  updateArchivedStatus(params: UpdateArchivedStatus$Params, context?: HttpContext): Promise<number> {
+  updateArchivedStatus(
+    params: UpdateArchivedStatus$Params,
+    context?: HttpContext
+  ): Promise<number> {
     const resp = this.updateArchivedStatus$Response(params, context);
     return resp.then((r: StrictHttpResponse<number>): number => r.body);
   }
@@ -256,7 +293,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllReturnedBooks$Response(params?: FindAllReturnedBooks$Params, context?: HttpContext): Promise<StrictHttpResponse<PageResponseBorrowedBookResponse>> {
+  findAllReturnedBooks$Response(
+    params?: FindAllReturnedBooks$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<PageResponseBorrowedBookResponse>> {
     const obs = findAllReturnedBooks(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -267,9 +307,15 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllReturnedBooks(params?: FindAllReturnedBooks$Params, context?: HttpContext): Promise<PageResponseBorrowedBookResponse> {
+  findAllReturnedBooks(
+    params?: FindAllReturnedBooks$Params,
+    context?: HttpContext
+  ): Promise<PageResponseBorrowedBookResponse> {
     const resp = this.findAllReturnedBooks$Response(params, context);
-    return resp.then((r: StrictHttpResponse<PageResponseBorrowedBookResponse>): PageResponseBorrowedBookResponse => r.body);
+    return resp.then(
+      (r: StrictHttpResponse<PageResponseBorrowedBookResponse>): PageResponseBorrowedBookResponse =>
+        r.body
+    );
   }
 
   /** Path part for operation `findAllBooksByOwner()` */
@@ -281,7 +327,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBooksByOwner$Response(params?: FindAllBooksByOwner$Params, context?: HttpContext): Promise<StrictHttpResponse<PageResponseBookResponse>> {
+  findAllBooksByOwner$Response(
+    params?: FindAllBooksByOwner$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<PageResponseBookResponse>> {
     const obs = findAllBooksByOwner(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -292,9 +341,14 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBooksByOwner(params?: FindAllBooksByOwner$Params, context?: HttpContext): Promise<PageResponseBookResponse> {
+  findAllBooksByOwner(
+    params?: FindAllBooksByOwner$Params,
+    context?: HttpContext
+  ): Promise<PageResponseBookResponse> {
     const resp = this.findAllBooksByOwner$Response(params, context);
-    return resp.then((r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse => r.body);
+    return resp.then(
+      (r: StrictHttpResponse<PageResponseBookResponse>): PageResponseBookResponse => r.body
+    );
   }
 
   /** Path part for operation `findAllBorrowedBooks()` */
@@ -306,7 +360,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBorrowedBooks$Response(params?: FindAllBorrowedBooks$Params, context?: HttpContext): Promise<StrictHttpResponse<PageResponseBorrowedBookResponse>> {
+  findAllBorrowedBooks$Response(
+    params?: FindAllBorrowedBooks$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<PageResponseBorrowedBookResponse>> {
     const obs = findAllBorrowedBooks(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -317,13 +374,19 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllBorrowedBooks(params?: FindAllBorrowedBooks$Params, context?: HttpContext): Promise<PageResponseBorrowedBookResponse> {
+  findAllBorrowedBooks(
+    params?: FindAllBorrowedBooks$Params,
+    context?: HttpContext
+  ): Promise<PageResponseBorrowedBookResponse> {
     const resp = this.findAllBorrowedBooks$Response(params, context);
-    return resp.then((r: StrictHttpResponse<PageResponseBorrowedBookResponse>): PageResponseBorrowedBookResponse => r.body);
+    return resp.then(
+      (r: StrictHttpResponse<PageResponseBorrowedBookResponse>): PageResponseBorrowedBookResponse =>
+        r.body
+    );
   }
 
   /** Path part for operation `findById()` */
-  static readonly FindByIdPath = '/books/book-id';
+  static readonly FindByIdPath = '/books/{book-id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -331,7 +394,10 @@ export class BookService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findById$Response(params?: FindById$Params, context?: HttpContext): Promise<StrictHttpResponse<BookResponse>> {
+  findById$Response(
+    params?: FindById$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<BookResponse>> {
     const obs = findById(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -346,5 +412,4 @@ export class BookService extends BaseService {
     const resp = this.findById$Response(params, context);
     return resp.then((r: StrictHttpResponse<BookResponse>): BookResponse => r.body);
   }
-
 }

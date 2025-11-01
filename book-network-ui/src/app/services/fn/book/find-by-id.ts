@@ -10,16 +10,21 @@ import { RequestBuilder } from '../../request-builder';
 import { BookResponse } from '../../models/book-response';
 
 export interface FindById$Params {
+  'book-id': number;
 }
 
-export function findById(http: HttpClient, rootUrl: string, params?: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<BookResponse>> {
+export function findById(
+  http: HttpClient,
+  rootUrl: string,
+  params?: FindById$Params,
+  context?: HttpContext
+): Observable<StrictHttpResponse<BookResponse>> {
   const rb = new RequestBuilder(rootUrl, findById.PATH, 'get');
   if (params) {
+    rb.path('book-id', params['book-id'], {});
   }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
+  return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<BookResponse>;
@@ -27,4 +32,4 @@ export function findById(http: HttpClient, rootUrl: string, params?: FindById$Pa
   );
 }
 
-findById.PATH = '/books/book-id';
+findById.PATH = '/books/{book-id}';
