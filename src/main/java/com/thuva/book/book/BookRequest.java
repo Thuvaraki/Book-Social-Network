@@ -5,20 +5,21 @@ import jakarta.validation.constraints.NotNull;
 
 public record BookRequest(
         Integer id,
-        @NotNull(message = "100") // field must not be null or empty, and if validation fails, return the error message 100
-        @NotEmpty(message = "100")
+
+        @NotNull(message = "Title is required.")
+        @NotEmpty(message = "Title cannot be empty.")
         String title,
 
-        @NotNull(message = "101")
-        @NotEmpty(message = "101")
+        @NotNull(message = "Author name is required.")
+        @NotEmpty(message = "Author name cannot be empty.")
         String authorName,
 
-        @NotNull(message = "102")
-        @NotEmpty(message = "102")
+        @NotNull(message = "ISBN is required.")
+        @NotEmpty(message = "ISBN cannot be empty.")
         String isbn,
 
-        @NotNull(message = "103")
-        @NotEmpty(message = "103")
+        @NotNull(message = "Synopsis is required.")
+        @NotEmpty(message = "Synopsis cannot be empty.")
         String synopsis,
         boolean shareable
 ) {
