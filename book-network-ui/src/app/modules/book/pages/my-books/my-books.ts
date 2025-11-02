@@ -60,9 +60,25 @@ export class MyBooks implements OnInit {
     return this.page === (this.bookResponse().totalPages as number) - 1;
   }
 
-  archiveBook(book: BookResponse) {}
+  archiveBook(book: BookResponse) {
+    this.bookService
+      .updateArchivedStatus({
+        'book-id': book.id as number,
+      })
+      .then((res) => {
+        book.archive = !book.archive;
+      });
+  }
 
-  shareBook(book: BookResponse) {}
+  shareBook(book: BookResponse) {
+    this.bookService
+      .updateShareableStatus({
+        'book-id': book.id as number,
+      })
+      .then((res) => {
+        book.shareable = !book.shareable;
+      });
+  }
 
   editBook(book: BookResponse) {
     this.router.navigate(['books', 'manage', book.id]);

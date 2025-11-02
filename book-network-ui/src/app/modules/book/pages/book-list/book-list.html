@@ -1,6 +1,6 @@
-<h3>Books list</h3>
+<h3 class="ms-5">Books list</h3>
 <div
-  *ngIf="message"
+  *ngIf="message()"
   class="alert"
   [class.alert-danger]="level() === 'error'"
   [class.alert-success]="level() === 'success'"
@@ -60,7 +60,7 @@
           class="page-link"
           href="javascript:void(0)"
           aria-label="Next"
-          [class.disabled]="isLastPage"
+          [class.disabled]="isLastPage || page === 0"
         >
           <i class="fa-solid fa-chevron-right"></i>
         </a>
@@ -71,7 +71,7 @@
           class="page-link"
           href="javascript:void(0)"
           aria-label="Next"
-          [class.disabled]="isLastPage"
+          [class.disabled]="isLastPage || page === 0"
         >
           <i class="fa-solid fa-angles-right"></i>
         </a>

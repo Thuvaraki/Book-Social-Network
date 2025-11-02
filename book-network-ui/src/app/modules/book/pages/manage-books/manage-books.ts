@@ -32,7 +32,7 @@ export class ManageBooks implements OnInit {
   ngOnInit(): void {
     const bookId = Number(this.activatedRoute.snapshot.params['bookId']);
     if (bookId) {
-      this.bookService.findById({ 'book-id': 1 }).then((book) => {
+      this.bookService.findById({ 'book-id': bookId }).then((book) => {
         this.bookRequest = {
           id: book.id,
           title: book.title as string,
@@ -44,7 +44,6 @@ export class ManageBooks implements OnInit {
         this.selectedPicture.set('data:image/jpg;base64,' + book.cover);
       });
     }
-    console.log('this.bookRequest', this.bookRequest);
   }
 
   saveBook() {

@@ -11,6 +11,7 @@ import { Rating } from '../rating/rating';
 })
 export class BookCard {
   private _book: BookResponse = {};
+
   private _manage = signal(false);
   private _bookCover: string | undefined;
 
