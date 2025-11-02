@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +9,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './menu.scss',
 })
 export class Menu implements OnInit {
+  constructor(private router: Router) {}
   ngOnInit(): void {
     const linkColor: NodeListOf<Element> = document.querySelectorAll('.nav-link');
     linkColor.forEach((link) => {
@@ -23,5 +25,8 @@ export class Menu implements OnInit {
     });
   }
 
-  logout(): void {}
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
 }
