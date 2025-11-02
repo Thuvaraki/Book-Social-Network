@@ -15,7 +15,12 @@ export interface FindAllFeedbackByBook$Params {
   size?: number;
 }
 
-export function findAllFeedbackByBook(http: HttpClient, rootUrl: string, params: FindAllFeedbackByBook$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseFeedbackResponse>> {
+export function findAllFeedbackByBook(
+  http: HttpClient,
+  rootUrl: string,
+  params: FindAllFeedbackByBook$Params,
+  context?: HttpContext
+): Observable<StrictHttpResponse<PageResponseFeedbackResponse>> {
   const rb = new RequestBuilder(rootUrl, findAllFeedbackByBook.PATH, 'get');
   if (params) {
     rb.path('book-id', params['book-id'], {});
@@ -23,9 +28,7 @@ export function findAllFeedbackByBook(http: HttpClient, rootUrl: string, params:
     rb.query('size', params.size, {});
   }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
+  return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<PageResponseFeedbackResponse>;

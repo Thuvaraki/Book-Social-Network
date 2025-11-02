@@ -65,8 +65,14 @@ export class MyBooks implements OnInit {
       .updateArchivedStatus({
         'book-id': book.id as number,
       })
-      .then((res) => {
-        book.archive = !book.archive;
+      .then(() => {
+        const updatedBooks = this.bookResponse().content?.map((b) =>
+          b.id === book.id ? { ...b, archive: !b.archive } : b
+        );
+        this.bookResponse.update((prev) => ({
+          ...prev,
+          content: updatedBooks,
+        }));
       });
   }
 
@@ -75,8 +81,14 @@ export class MyBooks implements OnInit {
       .updateShareableStatus({
         'book-id': book.id as number,
       })
-      .then((res) => {
-        book.shareable = !book.shareable;
+      .then(() => {
+        const updatedBooks = this.bookResponse().content?.map((b) =>
+          b.id === book.id ? { ...b, shareable: !b.shareable } : b
+        );
+        this.bookResponse.update((prev) => ({
+          ...prev,
+          content: updatedBooks,
+        }));
       });
   }
 

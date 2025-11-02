@@ -10,21 +10,26 @@ import { RequestBuilder } from '../../request-builder';
 import { FeedbackRequest } from '../../models/feedback-request';
 
 export interface SaveFeedback$Params {
-      body?: FeedbackRequest
+  body?: FeedbackRequest;
 }
 
-export function saveFeedback(http: HttpClient, rootUrl: string, params?: SaveFeedback$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+export function saveFeedback(
+  http: HttpClient,
+  rootUrl: string,
+  params?: SaveFeedback$Params,
+  context?: HttpContext
+): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, saveFeedback.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
 
-  return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
-  ).pipe(
+  return http.request(rb.build({ responseType: 'json', accept: 'application/json', context })).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: parseFloat(String((r as HttpResponse<any>).body)) }) as StrictHttpResponse<number>;
+      return (r as HttpResponse<any>).clone({
+        body: parseFloat(String((r as HttpResponse<any>).body)),
+      }) as StrictHttpResponse<number>;
     })
   );
 }

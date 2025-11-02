@@ -30,7 +30,10 @@ export class FeedbackService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  saveFeedback$Response(params?: SaveFeedback$Params, context?: HttpContext): Promise<StrictHttpResponse<number>> {
+  saveFeedback$Response(
+    params?: SaveFeedback$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<number>> {
     const obs = saveFeedback(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -55,7 +58,10 @@ export class FeedbackService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllFeedbackByBook$Response(params: FindAllFeedbackByBook$Params, context?: HttpContext): Promise<StrictHttpResponse<PageResponseFeedbackResponse>> {
+  findAllFeedbackByBook$Response(
+    params: FindAllFeedbackByBook$Params,
+    context?: HttpContext
+  ): Promise<StrictHttpResponse<PageResponseFeedbackResponse>> {
     const obs = findAllFeedbackByBook(this.http, this.rootUrl, params, context);
     return firstValueFrom(obs);
   }
@@ -66,9 +72,13 @@ export class FeedbackService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllFeedbackByBook(params: FindAllFeedbackByBook$Params, context?: HttpContext): Promise<PageResponseFeedbackResponse> {
+  findAllFeedbackByBook(
+    params: FindAllFeedbackByBook$Params,
+    context?: HttpContext
+  ): Promise<PageResponseFeedbackResponse> {
     const resp = this.findAllFeedbackByBook$Response(params, context);
-    return resp.then((r: StrictHttpResponse<PageResponseFeedbackResponse>): PageResponseFeedbackResponse => r.body);
+    return resp.then(
+      (r: StrictHttpResponse<PageResponseFeedbackResponse>): PageResponseFeedbackResponse => r.body
+    );
   }
-
 }

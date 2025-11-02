@@ -48,7 +48,7 @@ export class BorrowedBookList implements OnInit {
       .returnBorrowBook({
         'book-id': this.selectedBook()?.id as number,
       })
-      .then((res) => {
+      .then(() => {
         if (withFeedback) {
           this.giveFeedback();
         }
@@ -62,7 +62,10 @@ export class BorrowedBookList implements OnInit {
       .saveFeedback({
         body: this.feedbackRequest,
       })
-      .then((res) => {});
+      .then(() => {})
+      .catch((err) => {
+        console.log('error-', err.error);
+      });
   }
 
   gotToPage(page: number) {

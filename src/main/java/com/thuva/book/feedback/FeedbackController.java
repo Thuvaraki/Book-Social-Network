@@ -1,7 +1,8 @@
 package com.thuva.book.feedback;
 
 import com.thuva.book.common.PageResponse;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class FeedbackController {
 
     @PostMapping
     public ResponseEntity<Integer> saveFeedback(
-            @Valid @RequestBody FeedbackRequest request,
+             @Valid @RequestBody FeedbackRequest request,
             Authentication connectedUser
     ){
         return ResponseEntity.ok(service.save(request, connectedUser));
