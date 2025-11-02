@@ -45,7 +45,6 @@ export class BookCard {
   // The <BookResponse> part means it will emit data of that specific type
   @Output() share: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() archive: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
-  @Output() addToWaitingList: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() borrow: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() edit: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() details: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
@@ -56,10 +55,6 @@ export class BookCard {
 
   onArchive() {
     this.archive.emit(this._book);
-  }
-
-  onAddToWaitingList() {
-    this.addToWaitingList.emit(this._book);
   }
 
   onBorrow() {

@@ -4,6 +4,7 @@ import { Register } from './pages/register/register';
 import { ActivateAccount } from './pages/activate-account/activate-account';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // added to open the login page initially
   {
     path: 'login',
     component: Login,
